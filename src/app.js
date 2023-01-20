@@ -1,12 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <div>OI</div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
     </BrowserRouter>
   );
 }
