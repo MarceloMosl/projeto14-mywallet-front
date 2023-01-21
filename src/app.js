@@ -2,13 +2,22 @@ import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
+import Signup from "./components/singup";
+import Extract from "./components/extract";
 
 function App() {
+  const [token, setToken] = React.useState("");
+  const [name, setName] = React.useState("");
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={<Login setToken={setToken} setName={setName} />}
+        />
+        <Route path="/cadastro" element={<Signup />} />
+        <Route path="/home" element={<Extract token={token} name={name} />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,52 +1,64 @@
 import styled from "styled-components";
-import axios from "axios";
-import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import React from "react";
+import axios from "axios";
 
-export default function Login({ setToken, setName }) {
+export default function Signup() {
+  const [user, setUser] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confPassword, setConfPassword] = React.useState("");
   const navigate = useNavigate();
 
-  async function logar(a) {
+  async function newUser(a) {
     a.preventDefault();
-    console.log(email, password);
 
     try {
-      const promise = await axios.post("http://localhost:5000/login", {
+      await axios.post("http://localhost:5000/cadastro", {
+        user,
         email,
         password,
+        confPassword,
       });
-      setToken(promise.data.token);
-      setName(promise.data.name);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
-      return console.log(error);
+      console.log(error);
+      return alert(error.response.data);
     }
   }
+
   return (
     <Log>
-      <form onSubmit={(event) => logar(event)}>
+      <form onSubmit={(event) => newUser(event)}>
         <h1>MyWallet</h1>
 
         <input
+          type={"text"}
+          onChange={(event) => setUser(event.target.value)}
+          placeholder="Nome"
+          required={true}
+        ></input>
+        <input
+          type={"email"}
           onChange={(event) => setEmail(event.target.value)}
-          type="email"
           placeholder="E-mail"
           required={true}
         ></input>
         <input
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          type="password"
+          type={"password"}
+          onChange={(event) => setPassword(event.target.value)}
           placeholder="Senha"
           required={true}
         ></input>
-
-        <button type={"submit"}>Entrar</button>
-        <Link data-test="signup-link" to="/cadastro/">
-          Não tem cadastro ainda? Cadastre-se!
+        <input
+          type={"password"}
+          onChange={(event) => setConfPassword(event.target.value)}
+          placeholder="Confirme a Senha"
+          required={true}
+        ></input>
+        <button type={"submit"}>Cadastrar</button>
+        <Link data-test="signup-link" to="/">
+          Já tem uma conta? Entre agora!
         </Link>
       </form>
     </Log>
