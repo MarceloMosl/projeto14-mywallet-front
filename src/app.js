@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/singup";
 import Extract from "./components/extract";
+import NovaEntrada from "./components/novaEntrada";
+import NovaSaida from "./components/novaSaida";
 
 function App() {
   const [token, setToken] = React.useState("");
@@ -18,6 +20,8 @@ function App() {
         />
         <Route path="/cadastro" element={<Signup />} />
         <Route path="/home" element={<Extract token={token} name={name} />} />
+        <Route path="/nova-entrada" element={<NovaEntrada token={token} />} />
+        <Route path="/nova-saida" element={<NovaSaida token={token} />} />
       </Routes>
     </BrowserRouter>
   );

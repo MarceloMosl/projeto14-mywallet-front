@@ -65,7 +65,7 @@ export default function Signup() {
   );
 }
 const Log = styled.div`
-  background-color: purple;
+  background-color: rgb(140, 16, 190);
   display: flex;
 
   height: 100vh;

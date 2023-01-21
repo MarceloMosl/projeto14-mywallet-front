@@ -8,18 +8,15 @@ export default function Extract({ token, name }) {
   const [movs, setMovs] = React.useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    try {
-      const promise = axios.get("http://localhost:5000/extract", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      promise.then((res) => {
-        setMovs(res.data.movements);
-        setBalance(res.data.balance);
-      });
-    } catch (error) {
-      return error;
-    }
-  }, []);
+    const promise = axios.get("http://localhost:5000/extract", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    promise.then((res) => {
+      setMovs(res.data.movements);
+      setBalance(res.data.balance);
+    });
+    promise.catch((err) => alert(err));
+  }, [token]);
 
   return (
     <Main>
@@ -29,24 +26,26 @@ export default function Extract({ token, name }) {
       </Top>
 
       <Moves>
-        {movs.length === 0 ? (
-          <None>
-            Não há registros de <br /> entrada ou saíd
-          </None>
-        ) : (
-          movs.map((a) => (
-            <Line>
-              <p>
-                <span>{a.date}</span> {a.desc}
-              </p>
-              {a.type === "saida" ? (
-                <span style={{ color: "red" }}>{a.value.toFixed(2)}</span>
-              ) : (
-                <span style={{ color: "green" }}>{a.value.toFixed(2)}</span>
-              )}
-            </Line>
-          ))
-        )}
+        <section>
+          {movs.length === 0 ? (
+            <None>
+              Não há registros de <br /> entrada ou saíd
+            </None>
+          ) : (
+            movs.map((a, i) => (
+              <Line key={i}>
+                <p>
+                  <span>{a.date}</span> {a.desc}
+                </p>
+                {a.type === "saida" ? (
+                  <span style={{ color: "red" }}>{a.value.toFixed(2)}</span>
+                ) : (
+                  <span style={{ color: "green" }}>{a.value.toFixed(2)}</span>
+                )}
+              </Line>
+            ))
+          )}
+        </section>
 
         <Balance>
           <p>Saldo</p>
@@ -61,14 +60,14 @@ export default function Extract({ token, name }) {
       </Moves>
 
       <footer>
-        <Movement>
+        <Movement onClick={() => navigate("/nova-entrada")}>
           <ion-icon name="add-circle-outline"></ion-icon>
           <p>
             Nova <br />
             entrada
           </p>
         </Movement>
-        <Movement>
+        <Movement onClick={() => navigate("/nova-saida")}>
           <ion-icon name="remove-circle-outline"></ion-icon>
 
           <p>
@@ -85,7 +84,7 @@ const Main = styled.div`
   background-color: rgb(140, 16, 190);
   footer {
     display: flex;
-    width: 80%;
+    width: 75vw;
     margin: auto;
     margin-top: 20px;
     gap: 20px;
@@ -94,7 +93,7 @@ const Main = styled.div`
 `;
 const Top = styled.div`
   margin: auto;
-  width: 80vw;
+  width: 75vw;
   color: white;
   display: flex;
   font-size: 6vw;
@@ -110,6 +109,12 @@ const Moves = styled.div`
   margin: auto;
   border-radius: 5px;
   margin-top: 30px;
+  section {
+    height: 75vh;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+  }
 `;
 const Movement = styled.div`
   display: flex;
@@ -140,6 +145,7 @@ const Line = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  box-sizing: border-box;
 
   p {
     color: black;
@@ -153,11 +159,12 @@ const Line = styled.div`
 `;
 const Balance = styled.div`
   position: absolute;
-  bottom: 5px;
-  left: 1px;
+  bottom: 0px;
+  left: 0;
+  background-color: white;
   display: flex;
   justify-content: space-between;
-  width: 75vw;
+  width: 80vw;
   font-size: 25px;
   color: black;
   p {

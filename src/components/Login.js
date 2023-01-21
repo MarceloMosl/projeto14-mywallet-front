@@ -10,7 +10,6 @@ export default function Login({ setToken, setName }) {
 
   async function logar(a) {
     a.preventDefault();
-    console.log(email, password);
 
     try {
       const promise = await axios.post("http://localhost:5000/login", {
@@ -53,7 +52,7 @@ export default function Login({ setToken, setName }) {
   );
 }
 const Log = styled.div`
-  background-color: purple;
+  background-color: rgb(140, 16, 190);
   display: flex;
 
   height: 100vh;
