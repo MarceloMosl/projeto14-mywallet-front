@@ -1,11 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/singup";
-import Extract from "./components/extract";
-import NovaEntrada from "./components/novaEntrada";
-import NovaSaida from "./components/novaSaida";
+import Login from "./pages/Login";
+import Signup from "./pages/singup";
+import Extract from "./pages/extract";
+import NovaEntrada from "./pages/novaEntrada";
+import NovaSaida from "./pages/novaSaida";
 
 function App() {
   const [token, setToken] = React.useState("");
@@ -50,6 +50,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+ font-family: 'Raleway', sans-serif;;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

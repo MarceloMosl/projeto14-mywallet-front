@@ -66,6 +66,7 @@ const Log = styled.div`
     h1 {
       margin-bottom: 20px;
       font-size: 34px;
+      font-family: "Saira Stencil One", cursive;
     }
     input {
       border: none;

@@ -29,7 +29,7 @@ export default function Extract({ token, name }) {
         <section>
           {movs.length === 0 ? (
             <None>
-              Não há registros de <br /> entrada ou saíd
+              Não há registros de <br /> entrada ou saída
             </None>
           ) : (
             movs.map((a, i) => (
@@ -51,9 +51,9 @@ export default function Extract({ token, name }) {
           <p>Saldo</p>
           <span>
             {balance < 0 ? (
-              <p style={{ color: "red" }}>{balance}</p>
+              <p style={{ color: "red" }}>{balance.toFixed(2)}</p>
             ) : (
-              <p style={{ color: "green" }}>{balance}</p>
+              <p style={{ color: "green" }}>{balance.toFixed(2)}</p>
             )}
           </span>
         </Balance>
@@ -169,5 +169,10 @@ const Balance = styled.div`
   color: black;
   p {
     font-weight: bold;
+  }
+  span {
+    p {
+      font-weight: normal;
+    }
   }
 `;
