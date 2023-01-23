@@ -8,9 +8,12 @@ export default function Extract({ token, name }) {
   const [movs, setMovs] = React.useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    const promise = axios.get("http://localhost:5000/extract", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const promise = axios.get(
+      "https://projeto14-mywallet-back-wj2e.onrender.com/extract",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     promise.then((res) => {
       setMovs(res.data.movements);
       setBalance(res.data.balance);

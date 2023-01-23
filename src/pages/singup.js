@@ -14,12 +14,15 @@ export default function Signup() {
     a.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/cadastro", {
-        user,
-        email,
-        password,
-        confPassword,
-      });
+      await axios.post(
+        "https://projeto14-mywallet-back-wj2e.onrender.com/cadastro",
+        {
+          user,
+          email,
+          password,
+          confPassword,
+        }
+      );
       navigate("/");
     } catch (error) {
       console.log(error);

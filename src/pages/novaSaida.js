@@ -11,7 +11,7 @@ export default function NovaSaida({ token }) {
   function newMov(event) {
     event.preventDefault();
     const promise = axios.post(
-      "http://localhost:5000/extract",
+      "https://projeto14-mywallet-back-wj2e.onrender.com/extract",
       { type: "saida", value, desc },
       {
         headers: { Authorization: `Bearer ${token}` },

@@ -12,10 +12,13 @@ export default function Login({ setToken, setName }) {
     a.preventDefault();
 
     try {
-      const promise = await axios.post("http://localhost:5000/login", {
-        email,
-        password,
-      });
+      const promise = await axios.post(
+        "https://projeto14-mywallet-back-wj2e.onrender.com/login",
+        {
+          email,
+          password,
+        }
+      );
       setToken(promise.data.token);
       setName(promise.data.name);
       navigate("/home");
